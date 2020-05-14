@@ -2,11 +2,18 @@
 
 This is an example of how Video chat can be implemented from an Architecture perspective.
 
-Probably I implemented discover not exactly how it supposed to be, but I’ll add changes later. Now it’s more Viper :)
-
-Basically the goals were:
+The goals:
  - Separate responsibilities
  - Make View Controller dumb (use only as a container)
- - Build composition view in a way any part of it can be easily replaced or modified later
- - Use protocols everywhere when it’s possible
- - Set communication between layers like View <---> ViewModel <---> Context. View just responsible for user inputs and display received data. ViewModel is communication + prepares data for display for UI. Context responsible for data fetch.
+ - Make subview dumb: Collect data from user inputs, send collected data to its ViewModel, display updated data to user.
+ - Present ViewModel as a mediator between UI and Data.
+ - Buid CompositionView as a container for all subviews. Responsibilities: Build and Update elements layout, close, start and refresh room. 
+ - Use protocols oriented programming to describe views, models and compositions.
+ - Set communication between layers like shown on image below. Using Observale protocol and protocols for all imputs and outputs
+ - Use DI for insertation of ViewModels. For layers testing.
+
+![](SourceImage/ViewModels.png)
+
+ - Set Flow as a mediator between Context and CompositionViewModel
+
+![](SourceImage/Context_Composition.png)
